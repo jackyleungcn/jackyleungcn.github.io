@@ -4,11 +4,11 @@
 <html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head><meta name="generator" content="Hexo 3.9.0">
-    <title>归档: 2014 - it&#39;s Me.</title>
+    <title>Object(key/value)默认值与服务端交互 - it&#39;s Me.</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Jacky Leung">
-<meta name="description" content="A Blog Powered By Hexo">
+<meta name="description" content="避免null、undefined的传递">
 <meta name="keywords" content>
 
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?63685465">
+<link rel="stylesheet" href="/css/journal.css?77035876">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -63,7 +63,7 @@
                 首页
             </a>
             
-            <a class="a-block drawer-menu-item active" href="/archives">
+            <a class="a-block drawer-menu-item false" href="/archives">
                 归档
             </a>
             
@@ -117,7 +117,7 @@
 
     <div class="nav-link-list">
         
-        <a class="a-block no-tint nav-link-item active" href="/archives">
+        <a class="a-block no-tint nav-link-item false" href="/archives">
             归档
         </a>
         
@@ -154,53 +154,148 @@
         </a>
 
         
-        
-
-        
-
-        
-        
     </div>
 </div>
 
+
+
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
-        
-        
-        <div class="post-item-wrapper post-item-wrapper-no-hover">
-            <div class="post-item post-item-no-gaps">
-                <div class="post-item-info-wrapper">
-                    <div class="post-item-title  post-item-title-small">
+        <div class="post">
+            <div class="post-head-wrapper" style="background-image: url('/2018/05/23/Object(key-value)默认值与服务端交互/null-undefined.jpg')">
+                <div class="post-title">
+                    Object(key/value)默认值与服务端交互
+                    <div class="post-meta">
+                        <time datetime="2018-05-23T07:12:54.000Z" itemprop="datePublished">
+                            2018-05-23 15:12
+                        </time>&nbsp;
                         
-                        <a href="/archives/2014/04">
-                            2014 / 04
-                        </a>
                         
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-
-        <a href="/2014/04/08/一年前的一条微博/" class="a-block">
-            <div class="post-item-wrapper">
-                <div class="post-item post-item-no-gaps">
-                    <div class="post-item-info-wrapper">
-                        <div class="post-item-title">
-                            一年前的一条微博
-                        </div>
-                        <div class="post-item-meta">
-                            2014-04-08
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        
-    </div>
+                        <i class="material-icons" style>folder</i>
+                        
+                        <a href="/categories/技术小记/">技术小记</a>
+                        
+                        
     
+                        
+                        
+                        <i class="material-icons" style>label</i>
+                        
+                        <a href="/tags/Javascript/">Javascript</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <blockquote>
+<p>背景：在与服务器交互中，发送/接收的数据有误。有服务端同事反映在部分业务上发现太多如undefined、null之类的传值。鉴于此有了这篇文档，望前端er在日常开发中，避免出现这种数据上的传输错误。虽然看起来是小事，但是在特定的业务上，引发的不仅是服务端抛异常，更严重者会造成生产环境下的损失，如收集表单数据。项目直接导致公司损失。</p>
+</blockquote>
+<h3 id="数据交互表格"><a href="#数据交互表格" class="headerlink" title="数据交互表格"></a>数据交互表格</h3><table>
+<thead>
+<tr>
+<th>客户端发送</th>
+<th>服务端接收</th>
+<th>服务端返回</th>
+<th>客户端赋值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>“”（空字符串）</td>
+<td>“”</td>
+<td>“”</td>
+<td>“”</td>
+</tr>
+<tr>
+<td>null</td>
+<td>(null)</td>
+<td>字段缺省</td>
+<td>undefined（嵌套对象会抛异常）</td>
+</tr>
+<tr>
+<td>“null”</td>
+<td>“null”</td>
+<td>“null”</td>
+<td>“null”</td>
+</tr>
+<tr>
+<td>对象属性缺省 / undefined</td>
+<td>字段缺省</td>
+<td>字段缺省</td>
+<td>undefined（嵌套对象会抛异常）</td>
+</tr>
+<tr>
+<td>对象属性缺省 / undefined，String()转换成字符串</td>
+<td>“undefined”（若字段为数字类型，服务端Gson解析会报错）</td>
+<td>“undefined”</td>
+<td>“undefined”</td>
+</tr>
+</tbody></table>
+<br>
 
+<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String</td>
+<td>“”</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>0（按实际情况而定）</td>
+</tr>
+<tr>
+<td>Array</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>{}</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>true/false</td>
+</tr>
+</tbody></table>
+<p><strong>如无必要，默认值不要出现null、undefined这两种数据类型。（特殊情况除外，如部分第三方组件调用之类）</strong></p>
+<br>
+
+<h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><ol>
+<li>使用正确的默认值，如表2所示。</li>
+<li>在接收数据时，服务器常见是字段缺省，直接赋值会导致出现undefined。若获取嵌套对象的属性值，则会抛Cannot read property ‘key’ of undefined，可跟服务端沟通字段设置默认值。若嵌套过深，前端做好取值判断。</li>
+<li>在发送/接收数据时，遵循文档的数据类型，特别是Number和String的区分。</li>
+<li>在发送数据时，必须避免undefined、”undefined”、null、”null”这4种数据。对象属性值为undefined时，stringify会忽略该属性。对象属性值为null时，不可避免会出现null、”null”，提交前要做好判断。</li>
+</ol>
+<img src="object-stringify.png" alt="JSON.stringify结果" style="display: block; margin: 0 auto;">
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <a class="newer-posts" href="/2018/06/24/Git合作模式/">
+        上一篇<br>Git合作模式
+    </a>
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2016/06/07/PM2部署项目/">
+        下一篇<br>PM2部署项目
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
     <div class="single-column-footer">
     <!-- Proudly published with Hexo<br>
     
@@ -216,7 +311,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?97751481"></script>
+<script src="/js/journal.js?566533"></script>
+
+
 
 </body>
 </html>
