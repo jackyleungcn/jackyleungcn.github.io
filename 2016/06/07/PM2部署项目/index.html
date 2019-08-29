@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?38618705">
+<link rel="stylesheet" href="/css/journal.css?63203145">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -52,7 +52,7 @@
 <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
 </noscript>
-</head>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 <body>
 <div id="top"></div>
 <div id="app">
@@ -190,11 +190,29 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <h4 id="PM2-http-server-部署"><a href="#PM2-http-server-部署" class="headerlink" title="PM2 http-server 部署"></a>PM2 http-server 部署</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.cd到项目根目录</span><br><span class="line">2.which http-server 找到http-server模块路径</span><br><span class="line">3.pm2 start /usr/local/bin/http-server --name PM2_NAME -- -p PORT -d false</span><br><span class="line">（PS: pm2 start /usr/local/bin/http-server --name static-server -- -p 8080 -d false）</span><br></pre></td></tr></table></figure>
+                    <h4 id="PM2-http-server-部署"><a href="#PM2-http-server-部署" class="headerlink" title="PM2 http-server 部署"></a>PM2 http-server 部署</h4><pre class=" language-shell"><code class="language-shell">1.cd到项目根目录
+2.which http-server 找到http-server模块路径
+3.pm2 start /usr/local/bin/http-server --name PM2_NAME -- -p PORT -d false
+（PS: pm2 start /usr/local/bin/http-server --name static-server -- -p 8080 -d false）</code></pre>
+<h4 id="PM2-npm-部署"><a href="#PM2-npm-部署" class="headerlink" title="PM2 npm 部署"></a>PM2 npm 部署</h4><pre class=" language-shell"><code class="language-shell">pm2 start npm --name pm2_name -- start</code></pre>
+<h4 id="PM2-常用命令"><a href="#PM2-常用命令" class="headerlink" title="PM2 常用命令"></a>PM2 常用命令</h4><pre class=" language-shell"><code class="language-shell">pm2 list //查看PM2项目列表
 
-<h4 id="PM2-npm-部署"><a href="#PM2-npm-部署" class="headerlink" title="PM2 npm 部署"></a>PM2 npm 部署</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start npm --name pm2_name -- start</span><br></pre></td></tr></table></figure>
+pm2 start <app_name|id|'all'> //启动 全部/某个 项目
 
-<h4 id="PM2-常用命令"><a href="#PM2-常用命令" class="headerlink" title="PM2 常用命令"></a>PM2 常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">pm2 list //查看PM2项目列表</span><br><span class="line"></span><br><span class="line">pm2 start &lt;app_name|id|'all'&gt; //启动 全部/某个 项目</span><br><span class="line"></span><br><span class="line">pm2 stop &lt;app_name|id|'all'&gt; //停止 全部/某个 项目</span><br><span class="line"></span><br><span class="line">pm2 restart &lt;app_name|id|'all'&gt; //重启 全部/某个 项目</span><br><span class="line"></span><br><span class="line">pm2 delete &lt;app_name|id|'all'&gt; //删除 全部/某个 项目</span><br><span class="line"></span><br><span class="line">pm2 logs //查看全部项目日志</span><br><span class="line"></span><br><span class="line">pm2 logs &lt;app_name|id&gt; //查看某个项目日志</span><br><span class="line"></span><br><span class="line">pm2 save //保存当前项目列表配置</span><br><span class="line"></span><br><span class="line">pm2 resurrect //恢复项目列表，数据来自上一次pm2 save</span><br></pre></td></tr></table></figure>
+pm2 stop <app_name|id|'all'> //停止 全部/某个 项目
+
+pm2 restart <app_name|id|'all'> //重启 全部/某个 项目
+
+pm2 delete <app_name|id|'all'> //删除 全部/某个 项目
+
+pm2 logs //查看全部项目日志
+
+pm2 logs <app_name|id> //查看某个项目日志
+
+pm2 save //保存当前项目列表配置
+
+pm2 resurrect //恢复项目列表，数据来自上一次pm2 save</app_name|id></app_name|id|'all'></app_name|id|'all'></app_name|id|'all'></app_name|id|'all'></code></pre>
+
                 </div>
             </div>
     
@@ -206,8 +224,8 @@
     
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/2014/04/08/一年前的一条微博/">
-        下一篇<br>一年前的一条微博
+    <a class="older-posts" href="/2016/05/22/ES6优化-尾递归/">
+        下一篇<br>ES6优化-尾递归
     </a>
     
 </nav>
@@ -233,7 +251,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?80595654"></script>
+<script src="/js/journal.js?63565472"></script>
 
 
 
