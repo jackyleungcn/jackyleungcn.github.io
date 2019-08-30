@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <title>服务层的思考与实践 - it&#39;s Me.</title>
+<meta charset="utf-8">
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="author" content="Jacky Leung">
+<meta name="description" content="用分离的方法组织代码">
+<meta name="keywords" content>
+
+    <meta charset="utf-8">
+    <meta name="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/journal.css?12473923">
+
+<script src="/js/loadCSS.js"></script>
+<script>
+    loadCSS("https://fonts.googleapis.com/css?family=Lora|Montserrat|Fira+Mono|Material+Icons");
+    (function (d) {
+        var config = {
+                kitId: 'dwg1tuc',
+                scriptTimeout: 3000,
+                async: true
+            },
+            h = d.documentElement, t = setTimeout(function () {
+                h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive";
+            }, config.scriptTimeout), tk = d.createElement("script"), f = false,
+            s = d.getElementsByTagName("script")[0], a;
+        h.className += " wf-loading";
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+            a = this.readyState;
+            if (f || a && a != "complete" && a != "loaded") return;
+            f = true;
+            clearTimeout(t);
+            try {
+                Typekit.load(config)
+            } catch (e) {
+            }
+        };
+        s.parentNode.insertBefore(tk, s)
+    })(document);
+</script>
+<noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora|Montserrat|Anonymous+Pro:400|Material+Icons">
+</noscript>
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<body>
+<div id="top"></div>
+<div id="app">
+<div class="single-column-drawer-container" ref="drawer" v-bind:class="{ 'single-column-drawer-container-active': isDrawerOpen }">
+    <div class="drawer-content">
+        <div class="drawer-menu">
+            <a class="a-block drawer-menu-item false" href="http://yoursite.com">
+                首页
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/archives">
+                归档
+            </a>
+            
+
+            
+            
+            <a class="a-block drawer-menu-item false" href="/categories/index.html">
+                分类
+            </a>
+            
+            <a class="a-block drawer-menu-item false" href="/tags/index.html">
+                标签
+            </a>
+            
+
+            
+        </div>
+    </div>
+</div>
+<transition name="fade">
+    <div v-bind:class="{ 'single-column-drawer-mask': mounted }" v-if="isDrawerOpen" v-on:click="toggleDrawer"></div>
+</transition>
+<nav ref="navBar" class="navbar sticky-top navbar-light single-column-nav-container">
+    <div ref="navBackground" class="nav-background"></div>
+    <div class="container container-narrow nav-content">
+        <button id="nav_dropdown_btn" class="nav-dropdown-toggle" type="button" v-on:click="toggleDrawer">
+            <i class="material-icons">
+                menu
+            </i>
+        </button>
+        <a ref="navTitle" class="navbar-brand" href="/">
+            it&#39;s Me.
+        </a>
+    </div>
+</nav>
+<div class="single-column-header-container" ref="pageHead" v-bind:style="{ transform: 'translateZ(0px) translateY('+.3*scrollY+'px)', opacity: 1-navOpacity }">
+    <a href="/">
+        <div class="single-column-header-title">it&#39;s Me.</div>
+        <div class="single-column-header-subtitle"></div>
+    </a>
+</div>
+<div ref="sideContainer" class="side-container">
+    <a class="a-block nav-head false" href="/">
+        <div class="nav-title">
+            it's Me.
+        </div>
+        <div class="nav-subtitle">
+            畅游乾坤<br>天意人心
+        </div>
+    </a>
+
+    <div class="nav-link-list">
+        
+        <a class="a-block no-tint nav-link-item false" href="/archives">
+            归档
+        </a>
+        
+
+        
+        
+        <a class="a-block nav-link-item false" href="/categories/index.html">
+            分类
+        </a>
+        
+        <a class="a-block nav-link-item false" href="/tags/index.html">
+            标签
+        </a>
+        
+
+        
+    </div>
+
+    
+    <div class="nav-footer">
+        <!-- Proudly published with Hexo<br>
+        
+        Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+        
+        &copy; 2019 <a href="http://yoursite.com">it&#39;s Me.</a> -->
+    </div>
+</div>
+<div ref="extraContainer" class="extra-container">
+    <div class="pagination">
+        <a id="globalBackToTop" class="pagination-action animated-visibility" href="#top" :class="{ invisible: scrollY == 0 }">
+            <i class="material-icons pagination-action-icon">
+                keyboard_arrow_up
+            </i>
+        </a>
+
+        
+    </div>
+</div>
+
+
+
+<div ref="streamContainer" class="stream-container">
+    <div class="post-list-container post-list-container-shadow">
+        <div class="post">
+            <div class="post-head-wrapper" style="background-image: url('/2019/08/30/服务层的思考/cover.jpg')">
+                <div class="post-title">
+                    服务层的思考与实践
+                    <div class="post-meta">
+                        <time datetime="2019-08-30T02:04:52.000Z" itemprop="datePublished">
+                            2019-08-30 10:04
+                        </time>&nbsp;
+                        
+                        
+                        <i class="material-icons" style>folder</i>
+                        
+                        <a href="/categories/技术小记/">技术小记</a>
+                        
+                        
+    
+                        
+                        
+                        <i class="material-icons" style>label</i>
+                        
+                        <a href="/tags/Javascript/">Javascript</a>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+    
+            <div class="post-body-wrapper">
+                <div class="post-body">
+                    <blockquote>
+<p>背景：平时我们在写Vue和小程序时，习惯的把请求直接写在组件上，这是好的实践吗？是否有更好的处理方法？</p>
+</blockquote>
+<h1 id="过去"><a href="#过去" class="headerlink" title="过去"></a>过去</h1><hr>
+<p>刚开始工作的时候，我第一次接触的就是php。框架是像织梦cms、ecshop。当时前端还没有构建工具，也没有required.js, seajs，更没有前后端分离。前端的工作就是做好静态页面，然后套进php框架的views作为模板。项目组织架构是这样的：</p>
+<pre><code>.
+├── images/
+├── js/
+├── css/
+├── index.html
+.</code></pre><p>当时不理解，为什么php框架里，要分model、views、controller三个文件夹？页面是放在views里的，那另外2个文件夹是干嘛的呢？这就是大名鼎鼎的MVC。</p>
+<blockquote>
+<p>模型－视图－控制器（MVC）是Xerox PARC在二十世纪八十年代为编程语言Smalltalk－80发明的一种软件设计模式，已被广泛使用。后来被推荐为Oracle旗下Sun公司Java EE平台的设计模式，并且受到越来越多的使用ColdFusion和PHP的开发者的欢迎。——百度百科</p>
+</blockquote>
+<p>MVC是一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。</p>
+<p><strong>前人的思想：用分离的方法组织代码</strong></p>
+<h1 id="现在"><a href="#现在" class="headerlink" title="现在"></a>现在</h1><hr>
+<p>日常开发Vue项目的一个例子，目录结构和请求服务封装。</p>
+<pre><code>.
+├── src
+│   ├── http
+│   │     ├── index.js
+│   ├── views
+│   │     ├── pageA
+│   │     │     ├── index.vue
+│   │     │     ├── index.js
+│   │     │     ├── index.scss
+.</code></pre><pre class=" language-javascript"><code class="language-javascript"># index<span class="token punctuation">.</span>js
+<span class="token keyword">import</span> <span class="token punctuation">{</span>
+  aGetVipMemberList<span class="token punctuation">,</span>
+  aGetVipMemberInfo<span class="token punctuation">,</span>
+  aRemoveVipMember<span class="token punctuation">,</span>
+  aGetVipMemberGroupList<span class="token punctuation">,</span>
+  aSetVipMemberEnterGroup<span class="token punctuation">,</span>
+  aDelVipMemberInGroup
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'src/http'</span><span class="token punctuation">;</span>
+
+<span class="token function">getPayGroupList</span><span class="token punctuation">(</span>uid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// 请求服务</span>
+  <span class="token function">aGetVipMemberGroupList</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    app_uid<span class="token punctuation">:</span> uid
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/* 
+     * 展示和数据处理耦合在一起
+     * 作为组件的methods，应该聚焦于展示数据
+     */</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>payGroupList <span class="token operator">=</span> res<span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>item <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        <span class="token operator">...</span>item<span class="token punctuation">,</span>
+        group_name<span class="token punctuation">:</span> <span class="token template-string"><span class="token string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>item<span class="token punctuation">.</span>group_id <span class="token operator">||</span> <span class="token string">''</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">-</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>item<span class="token punctuation">.</span>group_name <span class="token operator">||</span> <span class="token string">''</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">,</span>
+        price<span class="token punctuation">:</span> item<span class="token punctuation">.</span>price <span class="token operator">/</span> <span class="token number">100</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>pPage<span class="token punctuation">.</span>all <span class="token operator">=</span> res<span class="token punctuation">.</span>total_size<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>pPage<span class="token punctuation">.</span>count <span class="token operator">=</span> res<span class="token punctuation">.</span>total_page<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>如上所示，数据获取 -&gt; 数据处理 -&gt; 数据展示，存在以下问题：</p>
+<ol>
+<li>代码耦合在一起，指责不清晰，边界模糊。</li>
+<li>请求服务与页面分离在不同的目录，查找麻烦。</li>
+<li>所有的请求服务都放在<code>src/http/index.js</code>，容易单点错误引发大面积瘫痪。</li>
+</ol>
+<p>由此可见，这里的代码并不分离。随着项目迭代，人员的更替，必定产生巨大的维护成本，招来“技术债”。</p>
+<h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><hr>
+<blockquote>
+<p>由于服务借鉴于Angular，这里碎碎念了自己一些经历，想直接看解决方案的可以略过此章节。</p>
+</blockquote>
+<p>说说我认识的AngularJS和Angular</p>
+<p>用过jQuery开发管理后台的人都知道，做一个表单字段的get/set是多繁琐。写iframe与服务端post提交表单是多累赘。当你看见MVVM双向绑定，你会兴奋到从椅子跳起来。</p>
+<p>2014年的时候，当时Vue和React还未火起来。AngularJS的MVVM打开了前端的一个新大陆。我也有幸用它做了一个<code>推送系统</code>，竞品是<code>个推</code>。公司并没有对外商用的计划，所以用于内部产品安卓系统生态的推送。入门概念很多，模块(Module)、依赖注入（DI）、注入器(Injector)、控制器(Controller)、指令(Directive)… 完全颠覆对前端项目架构。当趟过坑，感受就两字，真香。</p>
+<p>直到2015年，AngularJS被“放弃”，Google出了Angular2。嗯，完全不同，而且当时版本连跑“Hello World”成功都困难。同时React悄悄在社区中壮大，Vue也快步前进。鉴于“前端无大项目”，学习成本低且轻量级界面库更容易让人接受，我也慢慢的离开Angular的怀抱。但那种项目组织，却忘不了。</p>
+<p>直到17、18年，我在用Vue开发公司的管理后台时，遇到很多麻烦。</p>
+<ol>
+<li>目录组织太自由。萝卜青菜各有所爱，我***。</li>
+<li>代码写法太自由，用ESlint，是要基于你用什么插件，甚至是插件的vue/essential还是recommended?要配合其他如prettier？</li>
+<li>Object嵌套与模板绑定、组件props传递的抛error。</li>
+<li>父子组件交互各异，this.$refs.child.childFunc。</li>
+<li>Vuex，你是用{ mapGetters, … } from ‘vuex’全家桶呢，还是this.$store.state.xxx呢？随缘，你喜欢。</li>
+</ol>
+<p>不一一列举太多，诸如以上问题，是不是不能解决？不是，但怎么解决？靠团队规范，项目规范。但前提是，需求要做，没时间去梳理，而且以当时的知识积累并不完善，要做一个好的项目规范，也只是现阶段合适罢了。</p>
+<p>我开始想，之前做NG的时候，好像我都不用考虑这些。我就写实现，那项目组织也没那么多问题。为什么？因为实现NG的Google团队维护了条条框框来限定你的代码，以至于你必须在特定的地方写特定的内容，做到<strong>用分离的方法组织代码</strong>。</p>
+<p>基于此想法，在工作间隙，我开始重拾Angular。同时也丰富了诸如代码组织、项目组织、Typescript、代码指责的思想和概念。所以在19年做运维管理系统，我就下定决心一定要选型Angular。</p>
+<h1 id="服务层"><a href="#服务层" class="headerlink" title="服务层"></a>服务层</h1><hr>
+<blockquote>
+<p>组件不应该直接获取或保存数据，它们不应该了解是否在展示假数据。 它们应该聚焦于展示数据，而把数据访问的职责委托给某个服务。——Angular tutorial</p>
+</blockquote>
+<pre><code>.
+├── src
+│   ├── http
+│   │     ├── config.js                 // 服务配置
+│   │     ├── index.js                  // 提供挂载函数
+│   ├── views
+│   │     ├── pageA
+│   │     │     ├── index.vue
+│   │     │     ├── index.js            // 服务实例化
+│   │     │     ├── index.scss
+│   │     │     ├── index.service.js    // 组件服务层
+│   ├── main.js                         // 注册挂载服务
+.</code></pre><pre class=" language-javascript"><code class="language-javascript"># src<span class="token operator">/</span>http<span class="token operator">/</span>config<span class="token punctuation">.</span>js 
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span><span class="token punctuation">;</span>
+
+axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+axios<span class="token punctuation">.</span>interceptors<span class="token punctuation">.</span>response<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> axios</code></pre>
+<pre class=" language-javascript"><code class="language-javascript"># src<span class="token operator">/</span>http<span class="token operator">/</span>index<span class="token punctuation">.</span>js
+<span class="token keyword">import</span> http <span class="token keyword">from</span> <span class="token string">'./config'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    <span class="token function">install</span><span class="token punctuation">(</span>Vue<span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        Vue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$http <span class="token operator">=</span> http<span class="token punctuation">;</span>
+        Vue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$post <span class="token operator">=</span> <span class="token punctuation">(</span>url<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+          <span class="token keyword">return</span> http<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        Vue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>$<span class="token keyword">get</span> <span class="token operator">=</span> <span class="token punctuation">(</span>url<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+          <span class="token keyword">return</span> http<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"># src<span class="token operator">/</span>main<span class="token punctuation">.</span>js
+<span class="token keyword">import</span> http <span class="token keyword">from</span> <span class="token string">'./http/index'</span><span class="token punctuation">;</span>
+Vue<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>http<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript"># src<span class="token operator">/</span>views<span class="token operator">/</span>pageA<span class="token operator">/</span>index<span class="token punctuation">.</span>service<span class="token punctuation">.</span>js
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span><span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">service</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">async</span> <span class="token function">api1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> res <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$post</span><span class="token punctuation">(</span><span class="token string">"..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 按视图需要，预先处理好res数据
+     * ...
+     */</span>
+
+    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> service
+</code></pre>
+<pre class=" language-javascript"><code class="language-javascript"># src<span class="token operator">/</span>views<span class="token operator">/</span>pageA<span class="token operator">/</span>index<span class="token punctuation">.</span>js
+<span class="token keyword">import</span> service <span class="token keyword">from</span> <span class="token string">'./service'</span><span class="token punctuation">;</span>
+
+<span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>_$service <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">service</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+methods<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+  <span class="token function">_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_$service<span class="token punctuation">.</span><span class="token function">api1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>data<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h5 id="实现流程"><a href="#实现流程" class="headerlink" title="实现流程"></a>实现流程</h5><ol>
+<li>服务创建<ul>
+<li><code>src/http/config.js</code>，用于服务配置，如res、req拦截过滤。</li>
+<li><code>src/http/index.js</code>，用于提供挂载函数，如实现Vue的<code>install</code>函数并暴露。</li>
+<li><code>src/main.js</code>，挂载服务Vue.use(http)。</li>
+</ul>
+</li>
+<li>服务层<ul>
+<li><code>src/views/pageA/index.service.js</code>，服务逻辑实现。</li>
+</ul>
+</li>
+<li>组件<ul>
+<li><code>src/views/pageA/index.js</code>，this._$service = new service()，组件调用。</li>
+</ul>
+</li>
+</ol>
+<h5 id="问题回顾"><a href="#问题回顾" class="headerlink" title="问题回顾"></a>问题回顾</h5><ol>
+<li>代码耦合在一起，指责不清晰，边界模糊。<ul>
+<li>View负责展示逻辑。</li>
+<li>Service负责数据获取，处理。</li>
+</ul>
+</li>
+<li>请求服务与页面分离在不同的目录，查找麻烦。<ul>
+<li>index.js和index.service.js在同一个目录下，快速定位。</li>
+</ul>
+</li>
+<li>所有的请求服务都放在<code>src/http/index.js</code>，容易单点错误引发大面积瘫痪。<ul>
+<li>http分散到不同目录，错误只会影响到当前组件。</li>
+</ul>
+</li>
+</ol>
+<h1 id="层的思考"><a href="#层的思考" class="headerlink" title="层的思考"></a>层的思考</h1><hr>
+<p>部分开发者可能认为，服务层的引入多此一举。</p>
+<p>确实，引入服务层会让编码隔离，甚至繁琐。可是，在大型应用开发中，层级的划分是必须的，其对应的指责要清晰确定。这是多人合作开发不同系统模块，至下而上，形成一个健壮的应用的前提。</p>
+<p>本文通篇围绕着一句话：<strong>用分离的方法组织代码</strong></p>
+
+                </div>
+            </div>
+    
+            <nav class="post-pagination">
+    
+    <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2019/05/08/你不懂JS（You-Dont-Know-JS）阅读总结/">
+        下一篇<br>你不懂JS（You-Dont-Know-JS）阅读总结
+    </a>
+    
+</nav>
+
+    
+            
+
+
+        </div>
+    </div>
+    <div class="single-column-footer">
+    <!-- Proudly published with Hexo<br>
+    
+    Theme <a href="https://github.com/SumiMakito/hexo-theme-journal/" target="_blank" rel="noreferrer noopener">Journal.</a> by <a href="https://mak1t0.cc/" target="_blank" rel="noreferrer noopener">Makito</a><br>
+    
+    &copy; 2019 <a href="http://yoursite.com">it&#39;s Me.</a> -->
+</div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js" integrity="sha256-EGs9T1xMHdvM1geM8jPpoo8EZ1V1VRsmcJz8OByENLA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
+<script src="/js/journal.js?17540744"></script>
+
+
+
+</body>
+</html>
