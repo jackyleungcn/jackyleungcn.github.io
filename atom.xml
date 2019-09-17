@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-16T08:24:16.506Z</updated>
+  <updated>2019-08-30T09:22:19.569Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,34 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>初探Flutter踩坑记</title>
-    <link href="http://yoursite.com/2019/09/12/%E5%88%9D%E6%8E%A2Flutter%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
-    <id>http://yoursite.com/2019/09/12/初探Flutter踩坑记/</id>
-    <published>2019-09-12T02:16:37.000Z</published>
-    <updated>2019-09-16T08:24:16.506Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="为什么对Flutter“动心”了？"><a href="#为什么对Flutter“动心”了？" class="headerlink" title="为什么对Flutter“动心”了？"></a>为什么对Flutter“动心”了？</h1><hr><p>Javascript的跨平台技术，从PhoneGap、Ionic、Electron、ReactNative、Weex，我都了解过，但并没有深入去学习。可能是所在的公司业务并没有这方面的涉猎，互联网时代，技术是服务业务的。</p><p>但实际想想，我觉得更大的原因是，我认为这些方案都是“过渡性”的。直到Flutter，我看了它的实现原理，发现和游戏是如出一辙。对游戏有一定理解的都知道，移植游戏只要接上平台对应的操作接口，硬件的适配，性能跟得上，就可以实现移植到不同平台。基于此，我认为Flutter是一门真正面向跨平台的技术，所以对它“动心”了。</p><h1 id="学习心路历程"><a href="#学习心路历程" class="headerlink" title="学习心路历程"></a>学习心路历程</h1><hr><p>学习一门新技术，我一般会按以下流程：</p><ol><li>收集文档<ul><li>快速定位具体问题，章节，查阅API</li></ul></li><li>敲一遍官方Getting Started<ul><li>熟悉过程，掌握常用API和组件</li></ul></li><li>看技术实现原理<ul><li>了解其原理，增加对Flutter的认识</li></ul></li><li>看实战文章<ul><li>阅读前人踩坑记录，构建技巧</li></ul></li><li>开发应用DEMO<ul><li>“实践是检验真理的唯一标准”，实战开发过才能牢固知识</li></ul></li></ol><h1 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h1><hr><h3 id="Dart"><a href="#Dart" class="headerlink" title="Dart"></a>Dart</h3><ol><li>Pub包管理，需要在<code>pubspec.yaml``dependencies</code>中设置依赖</li><li>库引用，import对应的<code>class</code>文件，解耦封装不同职责的代码</li><li>JSON转化为entity，把JSON贴到 <a href="https://ashamp.github.io/jsonToDartModel/" target="_blank" rel="noopener">Json To Dart Model Code Generator</a>，自动生成</li><li>HTTP，使用<code>dio</code>并封装<code>request</code>、<code>response</code>拦截器(interceptor)</li><li>MD5加密使用<code>crypto</code>包</li><li>使用<code>async/await</code>处理异步</li><li>判断时，变量类型要相同</li><li>加载图片，默认底图使用<code>FadeInImage.assetNetwork</code>的<code>placeholder</code>属性</li><li>事件监听使用<code>GestureDetector</code>组件</li></ol><h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><ol><li>appBar头部自定义，使用<code>PreferredSize</code>组件</li><li>画圆角使用<code>ClipRRect</code>组件</li><li>动态列表(List)，使用<code>ListView.builder</code>组件</li><li>底部导航使用<code>BottomNavigationBar</code>组件</li><li>滚动加载下拉刷新使用<code>pull_to_refresh</code>包，内有<code>SmartRefresher</code>组件</li><li>webview使用<code>flutter_webview_plugin</code>包，内有<code>WebviewScaffold</code>组件</li></ol><h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><hr><h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h3><p>中文：<a href="https://flutterchina.club/get-started/codelab/" target="_blank" rel="noopener">https://flutterchina.club/get-started/codelab/</a></p><p>Flutter实战：<a href="https://book.flutterchina.club/" target="_blank" rel="noopener">https://book.flutterchina.club/</a></p><p>英文：<a href="https://flutter.dev/docs" target="_blank" rel="noopener">https://flutter.dev/docs</a>（部分中文不好使，英文文档保持官方最新）</p><h3 id="Dart-1"><a href="#Dart-1" class="headerlink" title="Dart"></a>Dart</h3><p>中文：<a href="http://dart.goodev.org/" target="_blank" rel="noopener">http://dart.goodev.org/</a></p><p>英文：<a href="https://dart.dev/" target="_blank" rel="noopener">https://dart.dev/</a></p><p>Dart学习笔记：<a href="http://www.cndartlang.com/special/dart-notes" target="_blank" rel="noopener">http://www.cndartlang.com/special/dart-notes</a></p><h3 id="实战推荐"><a href="#实战推荐" class="headerlink" title="实战推荐"></a>实战推荐</h3><ol><li>Flutter的原理及美团的实践<ul><li>上：<a href="https://zhuanlan.zhihu.com/p/41731412" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41731412</a></li><li>中：<a href="https://zhuanlan.zhihu.com/p/41731950" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41731950</a></li><li>下：<a href="https://zhuanlan.zhihu.com/p/41732803" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41732803</a></li></ul></li><li>Flutter学习指南：<a href="https://zhuanlan.zhihu.com/flutter" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/flutter</a></li><li>Flutter干货学堂（咸鱼）：<a href="https://zhuanlan.zhihu.com/xytech" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/xytech</a></li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;为什么对Flutter“动心”了？&quot;&gt;&lt;a href=&quot;#为什么对Flutter“动心”了？&quot; class=&quot;headerlink&quot; title=&quot;为什么对Flutter“动心”了？&quot;&gt;&lt;/a&gt;为什么对Flutter“动心”了？&lt;/h1&gt;&lt;hr&gt;
-&lt;p&gt;Javas
-      
-    
-    </summary>
-    
-      <category term="技术小记" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
-    
-    
-      <category term="Flutter" scheme="http://yoursite.com/tags/Flutter/"/>
-    
-      <category term="Dart" scheme="http://yoursite.com/tags/Dart/"/>
-    
-  </entry>
   
   <entry>
     <title>服务层的思考与实践</title>
