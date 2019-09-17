@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://www.liangjunqi.com/"/>
+  <link href="http://yoursite.com/"/>
   <updated>2019-09-16T08:24:16.506Z</updated>
-  <id>http://www.liangjunqi.com/</id>
+  <id>http://yoursite.com/</id>
   
   <author>
     <name>Jacky Leung</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>初探Flutter踩坑记</title>
-    <link href="http://www.liangjunqi.com/2019/09/12/%E5%88%9D%E6%8E%A2Flutter%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
-    <id>http://www.liangjunqi.com/2019/09/12/初探Flutter踩坑记/</id>
+    <link href="http://yoursite.com/2019/09/12/%E5%88%9D%E6%8E%A2Flutter%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
+    <id>http://yoursite.com/2019/09/12/初探Flutter踩坑记/</id>
     <published>2019-09-12T02:16:37.000Z</published>
     <updated>2019-09-16T08:24:16.506Z</updated>
     
@@ -35,19 +35,19 @@
     
     </summary>
     
-      <category term="技术小记" scheme="http://www.liangjunqi.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
+      <category term="技术小记" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
     
     
-      <category term="Flutter" scheme="http://www.liangjunqi.com/tags/Flutter/"/>
+      <category term="Flutter" scheme="http://yoursite.com/tags/Flutter/"/>
     
-      <category term="Dart" scheme="http://www.liangjunqi.com/tags/Dart/"/>
+      <category term="Dart" scheme="http://yoursite.com/tags/Dart/"/>
     
   </entry>
   
   <entry>
     <title>服务层的思考与实践</title>
-    <link href="http://www.liangjunqi.com/2019/08/30/%E6%9C%8D%E5%8A%A1%E5%B1%82%E7%9A%84%E6%80%9D%E8%80%83/"/>
-    <id>http://www.liangjunqi.com/2019/08/30/服务层的思考/</id>
+    <link href="http://yoursite.com/2019/08/30/%E6%9C%8D%E5%8A%A1%E5%B1%82%E7%9A%84%E6%80%9D%E8%80%83/"/>
+    <id>http://yoursite.com/2019/08/30/服务层的思考/</id>
     <published>2019-08-30T02:04:52.000Z</published>
     <updated>2019-08-30T09:22:19.569Z</updated>
     
@@ -65,17 +65,17 @@
     
     </summary>
     
-      <category term="技术小记" scheme="http://www.liangjunqi.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
+      <category term="技术小记" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
     
     
-      <category term="Javascript" scheme="http://www.liangjunqi.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
   </entry>
   
   <entry>
     <title>你不懂JS（You-Dont-Know-JS）阅读总结</title>
-    <link href="http://www.liangjunqi.com/2019/05/08/%E4%BD%A0%E4%B8%8D%E6%87%82JS%EF%BC%88You-Dont-Know-JS%EF%BC%89%E9%98%85%E8%AF%BB%E6%80%BB%E7%BB%93/"/>
-    <id>http://www.liangjunqi.com/2019/05/08/你不懂JS（You-Dont-Know-JS）阅读总结/</id>
+    <link href="http://yoursite.com/2019/05/08/%E4%BD%A0%E4%B8%8D%E6%87%82JS%EF%BC%88You-Dont-Know-JS%EF%BC%89%E9%98%85%E8%AF%BB%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/05/08/你不懂JS（You-Dont-Know-JS）阅读总结/</id>
     <published>2019-05-08T08:04:23.000Z</published>
     <updated>2019-08-29T06:18:19.299Z</updated>
     
@@ -93,17 +93,17 @@
     
     </summary>
     
-      <category term="读书" scheme="http://www.liangjunqi.com/categories/%E8%AF%BB%E4%B9%A6/"/>
+      <category term="读书" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6/"/>
     
     
-      <category term="Javascript" scheme="http://www.liangjunqi.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
   </entry>
   
   <entry>
     <title>Git合作模式</title>
-    <link href="http://www.liangjunqi.com/2018/06/24/Git%E5%90%88%E4%BD%9C%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://www.liangjunqi.com/2018/06/24/Git合作模式/</id>
+    <link href="http://yoursite.com/2018/06/24/Git%E5%90%88%E4%BD%9C%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2018/06/24/Git合作模式/</id>
     <published>2018-06-24T11:46:31.000Z</published>
     <updated>2019-08-28T09:57:37.462Z</updated>
     
@@ -118,17 +118,17 @@
     
     </summary>
     
-      <category term="管理" scheme="http://www.liangjunqi.com/categories/%E7%AE%A1%E7%90%86/"/>
+      <category term="管理" scheme="http://yoursite.com/categories/%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="Git" scheme="http://www.liangjunqi.com/tags/Git/"/>
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
   <entry>
     <title>Object(key/value)默认值与服务端交互</title>
-    <link href="http://www.liangjunqi.com/2018/05/23/Object(key-value)%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BA%A4%E4%BA%92/"/>
-    <id>http://www.liangjunqi.com/2018/05/23/Object(key-value)默认值与服务端交互/</id>
+    <link href="http://yoursite.com/2018/05/23/Object(key-value)%E9%BB%98%E8%AE%A4%E5%80%BC%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BA%A4%E4%BA%92/"/>
+    <id>http://yoursite.com/2018/05/23/Object(key-value)默认值与服务端交互/</id>
     <published>2018-05-23T07:12:54.000Z</published>
     <updated>2019-08-29T06:12:15.391Z</updated>
     
@@ -144,17 +144,17 @@
     
     </summary>
     
-      <category term="技术小记" scheme="http://www.liangjunqi.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
+      <category term="技术小记" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
     
     
-      <category term="Javascript" scheme="http://www.liangjunqi.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
   </entry>
   
   <entry>
     <title>PM2部署项目</title>
-    <link href="http://www.liangjunqi.com/2016/06/07/PM2%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://www.liangjunqi.com/2016/06/07/PM2部署项目/</id>
+    <link href="http://yoursite.com/2016/06/07/PM2%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://yoursite.com/2016/06/07/PM2部署项目/</id>
     <published>2016-06-07T09:06:53.000Z</published>
     <updated>2019-08-29T05:59:37.792Z</updated>
     
@@ -169,17 +169,17 @@
     
     </summary>
     
-      <category term="服务端" scheme="http://www.liangjunqi.com/categories/%E6%9C%8D%E5%8A%A1%E7%AB%AF/"/>
+      <category term="服务端" scheme="http://yoursite.com/categories/%E6%9C%8D%E5%8A%A1%E7%AB%AF/"/>
     
     
-      <category term="Node.js" scheme="http://www.liangjunqi.com/tags/Node-js/"/>
+      <category term="Node.js" scheme="http://yoursite.com/tags/Node-js/"/>
     
   </entry>
   
   <entry>
     <title>ES6优化-尾递归</title>
-    <link href="http://www.liangjunqi.com/2016/05/22/ES6%E4%BC%98%E5%8C%96-%E5%B0%BE%E9%80%92%E5%BD%92/"/>
-    <id>http://www.liangjunqi.com/2016/05/22/ES6优化-尾递归/</id>
+    <link href="http://yoursite.com/2016/05/22/ES6%E4%BC%98%E5%8C%96-%E5%B0%BE%E9%80%92%E5%BD%92/"/>
+    <id>http://yoursite.com/2016/05/22/ES6优化-尾递归/</id>
     <published>2016-05-22T13:24:06.000Z</published>
     <updated>2019-08-29T06:32:00.824Z</updated>
     
@@ -197,17 +197,17 @@
     
     </summary>
     
-      <category term="技术小记" scheme="http://www.liangjunqi.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
+      <category term="技术小记" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E5%B0%8F%E8%AE%B0/"/>
     
     
-      <category term="Javascript" scheme="http://www.liangjunqi.com/tags/Javascript/"/>
+      <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
   </entry>
   
   <entry>
     <title>一年前的一条微博</title>
-    <link href="http://www.liangjunqi.com/2014/04/08/%E4%B8%80%E5%B9%B4%E5%89%8D%E7%9A%84%E4%B8%80%E6%9D%A1%E5%BE%AE%E5%8D%9A/"/>
-    <id>http://www.liangjunqi.com/2014/04/08/一年前的一条微博/</id>
+    <link href="http://yoursite.com/2014/04/08/%E4%B8%80%E5%B9%B4%E5%89%8D%E7%9A%84%E4%B8%80%E6%9D%A1%E5%BE%AE%E5%8D%9A/"/>
+    <id>http://yoursite.com/2014/04/08/一年前的一条微博/</id>
     <published>2014-04-08T10:00:00.000Z</published>
     <updated>2019-08-28T09:57:22.349Z</updated>
     
@@ -226,10 +226,10 @@
     
     </summary>
     
-      <category term="日记" scheme="http://www.liangjunqi.com/categories/%E6%97%A5%E8%AE%B0/"/>
+      <category term="日记" scheme="http://yoursite.com/categories/%E6%97%A5%E8%AE%B0/"/>
     
     
-      <category term="个人感想" scheme="http://www.liangjunqi.com/tags/%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%83%B3/"/>
+      <category term="个人感想" scheme="http://yoursite.com/tags/%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%83%B3/"/>
     
   </entry>
   
