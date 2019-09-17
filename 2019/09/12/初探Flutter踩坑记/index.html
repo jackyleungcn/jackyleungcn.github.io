@@ -4,11 +4,11 @@
 <html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head><meta name="generator" content="Hexo 3.9.0">
-    <title>Object(key/value)默认值与服务端交互 - it&#39;s Me.</title>
+    <title>初探Flutter踩坑记 - it&#39;s Me.</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Jacky Leung">
-<meta name="description" content="避免null、undefined的传递">
+<meta name="description" content="学习Flutter的过程实记">
 <meta name="keywords" content>
 
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?57472957">
+<link rel="stylesheet" href="/css/journal.css?45118663">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -162,12 +162,12 @@
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
-            <div class="post-head-wrapper" style="background-image: url('/2018/05/23/Object(key-value)默认值与服务端交互/null-undefined.jpg')">
+            <div class="post-head-wrapper" style="background-image: url('/2019/09/12/初探Flutter踩坑记/cover.jpg')">
                 <div class="post-title">
-                    Object(key/value)默认值与服务端交互
+                    初探Flutter踩坑记
                     <div class="post-meta">
-                        <time datetime="2018-05-23T07:12:54.000Z" itemprop="datePublished">
-                            2018-05-23 15:12
+                        <time datetime="2019-09-12T02:16:37.000Z" itemprop="datePublished">
+                            2019-09-12 10:16
                         </time>&nbsp;
                         
                         
@@ -181,7 +181,9 @@
                         
                         <i class="material-icons" style>label</i>
                         
-                        <a href="/tags/Javascript/">Javascript</a>
+                        <a href="/tags/Flutter/">Flutter</a>, 
+                        
+                        <a href="/tags/Dart/">Dart</a>
                         
                         
                     </div>
@@ -190,102 +192,80 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <blockquote>
-<p>背景：在与服务器交互中，发送/接收的数据有误。有服务端同事反映在部分业务上发现太多如undefined、null之类的传值。鉴于此有了这篇文档，望前端er在日常开发中，避免出现这种数据上的传输错误。虽然看起来是小事，但是在特定的业务上，引发的不仅是服务端抛异常，更严重者会造成生产环境下的损失，如收集表单数据。项目直接导致公司损失。</p>
-</blockquote>
-<h3 id="数据交互表格"><a href="#数据交互表格" class="headerlink" title="数据交互表格"></a>数据交互表格</h3><table>
-<thead>
-<tr>
-<th>客户端发送</th>
-<th>服务端接收</th>
-<th>服务端返回</th>
-<th>客户端赋值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>“”（空字符串）</td>
-<td>“”</td>
-<td>“”</td>
-<td>“”</td>
-</tr>
-<tr>
-<td>null</td>
-<td>(null)</td>
-<td>字段缺省</td>
-<td>undefined（嵌套对象会抛异常）</td>
-</tr>
-<tr>
-<td>“null”</td>
-<td>“null”</td>
-<td>“null”</td>
-<td>“null”</td>
-</tr>
-<tr>
-<td>对象属性缺省 / undefined</td>
-<td>字段缺省</td>
-<td>字段缺省</td>
-<td>undefined（嵌套对象会抛异常）</td>
-</tr>
-<tr>
-<td>对象属性缺省 / undefined，String()转换成字符串</td>
-<td>“undefined”（若字段为数字类型，服务端Gson解析会报错）</td>
-<td>“undefined”</td>
-<td>“undefined”</td>
-</tr>
-</tbody></table>
-<br>
-
-<h3 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>String</td>
-<td>“”</td>
-</tr>
-<tr>
-<td>Number</td>
-<td>0（按实际情况而定）</td>
-</tr>
-<tr>
-<td>Array</td>
-<td>[]</td>
-</tr>
-<tr>
-<td>Object</td>
-<td>{}</td>
-</tr>
-<tr>
-<td>Boolean</td>
-<td>true/false</td>
-</tr>
-</tbody></table>
-<p><strong>如无必要，默认值不要出现null、undefined这两种数据类型。（特殊情况除外，如部分第三方组件调用之类）</strong></p>
-<br>
-
-<h3 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h3><ol>
-<li>使用正确的默认值，如表2所示。</li>
-<li>在接收数据时，服务器常见是字段缺省，直接赋值会导致出现undefined。若获取嵌套对象的属性值，则会抛Cannot read property ‘key’ of undefined，可跟服务端沟通字段设置默认值。若嵌套过深，前端做好取值判断。</li>
-<li>在发送/接收数据时，遵循文档的数据类型，特别是Number和String的区分。</li>
-<li>在发送数据时，必须避免undefined、”undefined”、null、”null”这4种数据。对象属性值为undefined时，stringify会忽略该属性。对象属性值为null时，不可避免会出现null、”null”，提交前要做好判断。</li>
+                    <h1 id="为什么对Flutter“动心”了？"><a href="#为什么对Flutter“动心”了？" class="headerlink" title="为什么对Flutter“动心”了？"></a>为什么对Flutter“动心”了？</h1><hr>
+<p>Javascript的跨平台技术，从PhoneGap、Ionic、Electron、ReactNative、Weex，我都了解过，但并没有深入去学习。可能是所在的公司业务并没有这方面的涉猎，互联网时代，技术是服务业务的。</p>
+<p>但实际想想，我觉得更大的原因是，我认为这些方案都是“过渡性”的。直到Flutter，我看了它的实现原理，发现和游戏是如出一辙。对游戏有一定理解的都知道，移植游戏只要接上平台对应的操作接口，硬件的适配，性能跟得上，就可以实现移植到不同平台。基于此，我认为Flutter是一门真正面向跨平台的技术，所以对它“动心”了。</p>
+<h1 id="学习心路历程"><a href="#学习心路历程" class="headerlink" title="学习心路历程"></a>学习心路历程</h1><hr>
+<p>学习一门新技术，我一般会按以下流程：</p>
+<ol>
+<li>收集文档<ul>
+<li>快速定位具体问题，章节，查阅API</li>
+</ul>
+</li>
+<li>敲一遍官方Getting Started<ul>
+<li>熟悉过程，掌握常用API和组件</li>
+</ul>
+</li>
+<li>看技术实现原理<ul>
+<li>了解其原理，增加对Flutter的认识</li>
+</ul>
+</li>
+<li>看实战文章<ul>
+<li>阅读前人踩坑记录，构建技巧</li>
+</ul>
+</li>
+<li>开发应用DEMO<ul>
+<li>“实践是检验真理的唯一标准”，实战开发过才能牢固知识</li>
+</ul>
+</li>
 </ol>
-<img src="object-stringify.png" alt="JSON.stringify结果" style="display: block; margin: 0 auto;">
+<h1 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h1><hr>
+<h3 id="Dart"><a href="#Dart" class="headerlink" title="Dart"></a>Dart</h3><ol>
+<li>Pub包管理，需要在<code>pubspec.yaml``dependencies</code>中设置依赖</li>
+<li>库引用，import对应的<code>class</code>文件，解耦封装不同职责的代码</li>
+<li>JSON转化为entity，把JSON贴到 <a href="https://ashamp.github.io/jsonToDartModel/" target="_blank" rel="noopener">Json To Dart Model Code Generator</a>，自动生成</li>
+<li>HTTP，使用<code>dio</code>并封装<code>request</code>、<code>response</code>拦截器(interceptor)</li>
+<li>MD5加密使用<code>crypto</code>包</li>
+<li>使用<code>async/await</code>处理异步</li>
+<li>判断时，变量类型要相同</li>
+<li>加载图片，默认底图使用<code>FadeInImage.assetNetwork</code>的<code>placeholder</code>属性</li>
+<li>事件监听使用<code>GestureDetector</code>组件</li>
+</ol>
+<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><ol>
+<li>appBar头部自定义，使用<code>PreferredSize</code>组件</li>
+<li>画圆角使用<code>ClipRRect</code>组件</li>
+<li>动态列表(List)，使用<code>ListView.builder</code>组件</li>
+<li>底部导航使用<code>BottomNavigationBar</code>组件</li>
+<li>滚动加载下拉刷新使用<code>pull_to_refresh</code>包，内有<code>SmartRefresher</code>组件</li>
+<li>webview使用<code>flutter_webview_plugin</code>包，内有<code>WebviewScaffold</code>组件</li>
+</ol>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><hr>
+<h3 id="Flutter"><a href="#Flutter" class="headerlink" title="Flutter"></a>Flutter</h3><p>中文：<a href="https://flutterchina.club/get-started/codelab/" target="_blank" rel="noopener">https://flutterchina.club/get-started/codelab/</a></p>
+<p>Flutter实战：<a href="https://book.flutterchina.club/" target="_blank" rel="noopener">https://book.flutterchina.club/</a></p>
+<p>英文：<a href="https://flutter.dev/docs" target="_blank" rel="noopener">https://flutter.dev/docs</a>（部分中文不好使，英文文档保持官方最新）</p>
+<h3 id="Dart-1"><a href="#Dart-1" class="headerlink" title="Dart"></a>Dart</h3><p>中文：<a href="http://dart.goodev.org/" target="_blank" rel="noopener">http://dart.goodev.org/</a></p>
+<p>英文：<a href="https://dart.dev/" target="_blank" rel="noopener">https://dart.dev/</a></p>
+<p>Dart学习笔记：<a href="http://www.cndartlang.com/special/dart-notes" target="_blank" rel="noopener">http://www.cndartlang.com/special/dart-notes</a></p>
+<h3 id="实战推荐"><a href="#实战推荐" class="headerlink" title="实战推荐"></a>实战推荐</h3><ol>
+<li>Flutter的原理及美团的实践<ul>
+<li>上：<a href="https://zhuanlan.zhihu.com/p/41731412" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41731412</a></li>
+<li>中：<a href="https://zhuanlan.zhihu.com/p/41731950" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41731950</a></li>
+<li>下：<a href="https://zhuanlan.zhihu.com/p/41732803" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/41732803</a></li>
+</ul>
+</li>
+<li>Flutter学习指南：<a href="https://zhuanlan.zhihu.com/flutter" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/flutter</a></li>
+<li>Flutter干货学堂（咸鱼）：<a href="https://zhuanlan.zhihu.com/xytech" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/xytech</a></li>
+</ol>
+
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/2018/06/24/Git合作模式/">
-        上一篇<br>Git合作模式
-    </a>
-    
     <span class="page-number"></span>
     
-    <a class="older-posts" href="/2016/06/07/PM2部署项目/">
-        下一篇<br>PM2部署项目
+    <a class="older-posts" href="/2019/08/30/服务层的思考/">
+        下一篇<br>服务层的思考与实践
     </a>
     
 </nav>
@@ -311,7 +291,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?14372348"></script>
+<script src="/js/journal.js?57757647"></script>
 
 
 
