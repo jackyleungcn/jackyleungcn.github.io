@@ -4,11 +4,11 @@
 <html lang="zh-CN" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 
 <head><meta name="generator" content="Hexo 3.9.0">
-    <title>一年前的一条微博 - it&#39;s Me.</title>
+    <title>团队统一代码风格 - it&#39;s Me.</title>
 <meta charset="utf-8">
 <meta name="X-UA-Compatible" content="IE=edge">
 <meta name="author" content="Jacky Leung">
-<meta name="description" content="踏入职场前的一则信息">
+<meta name="description" content="使用Prettier统一团队项目间的代码风格">
 <meta name="keywords" content>
 
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/journal.css?44699381">
+<link rel="stylesheet" href="/css/journal.css?35335855">
 
 <script src="/js/loadCSS.js"></script>
 <script>
@@ -162,18 +162,18 @@
 <div ref="streamContainer" class="stream-container">
     <div class="post-list-container post-list-container-shadow">
         <div class="post">
-            <div class="post-head-wrapper" style="background-image: url('/2014/04/08/一年前的一条微博/front-skill.jpg')">
+            <div class="post-head-wrapper" style="background-image: url('/2018/11/08/团队统一代码风格/cover.png')">
                 <div class="post-title">
-                    一年前的一条微博
+                    团队统一代码风格
                     <div class="post-meta">
-                        <time datetime="2014-04-08T10:00:00.000Z" itemprop="datePublished">
-                            2014-04-08 18:00
+                        <time datetime="2018-11-08T02:42:33.000Z" itemprop="datePublished">
+                            2018-11-08 10:42
                         </time>&nbsp;
                         
                         
                         <i class="material-icons" style>folder</i>
                         
-                        <a href="/categories/日记/">日记</a>
+                        <a href="/categories/管理/">管理</a>
                         
                         
     
@@ -181,7 +181,7 @@
                         
                         <i class="material-icons" style>label</i>
                         
-                        <a href="/tags/个人感想/">个人感想</a>
+                        <a href="/tags/Javascript/">Javascript</a>
                         
                         
                     </div>
@@ -190,21 +190,103 @@
     
             <div class="post-body-wrapper">
                 <div class="post-body">
-                    <img src="weibo-front-msg.png" style="margin: 0 auto; display: block;">
+                    <blockquote>
+<p>统一代码格式，让开发间合作更顺畅</p>
+</blockquote>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><hr>
+<h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>安装<a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode" target="_blank" rel="noopener">Prettier Extention</a></p>
+<p><img src="VSCode.png" alt="VSCode"></p>
+<h3 id="WebStorm"><a href="#WebStorm" class="headerlink" title="WebStorm"></a>WebStorm</h3><p>安装 Prettier Plugin</p>
+<p><img src="WebStorm.png" alt="WebStorm"></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><hr>
+<pre class=" language-javascript"><code class="language-javascript"># <span class="token punctuation">.</span>prettier<span class="token punctuation">.</span>js
 
-<br>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    printWidth<span class="token punctuation">:</span> <span class="token number">80</span><span class="token punctuation">,</span>
+    tabWidth<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    useTabs<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    semi<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    singleQuote<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    quoteProps<span class="token punctuation">:</span> <span class="token string">"as-needed"</span><span class="token punctuation">,</span>
+    trailingComma<span class="token punctuation">:</span> <span class="token string">"es5"</span><span class="token punctuation">,</span>
+    bracketSpacing<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    arrowParens<span class="token punctuation">:</span> <span class="token string">"always"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-javascript"><code class="language-javascript">VSCode
+# settings<span class="token punctuation">.</span>json
 
-<p style="text-align: right">也不知道错对，当时满怀激情的憧憬。</p>
+<span class="token punctuation">{</span>
+  <span class="token string">"window.zoomLevel"</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token string">"vetur.format.defaultFormatter.html"</span><span class="token punctuation">:</span> <span class="token string">"prettier"</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+由于IDE的配置会影响到prettier，所以只保留以上配置</code></pre>
+<pre><code>WebStorm
+
+IDE默认配置</code></pre><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><hr>
+<h3 id="WebStorm-1"><a href="#WebStorm-1" class="headerlink" title="WebStorm"></a>WebStorm</h3><ul>
+<li>Mac：Alt + Shift + Cmd + P</li>
+<li>Windows: Alt + Shift + Ctrl + P</li>
+</ul>
+<p>或</p>
+<ul>
+<li>Mac:CMD + Shit + A</li>
+<li>Windows:Ctrl + Shift + A，然后输入 Prett…</li>
+</ul>
+<p>或</p>
+<ul>
+<li>Double Shift(连按两次 Shift)，然后选择 Action，然后输入 Prett…</li>
+</ul>
+<h3 id="VSCode-1"><a href="#VSCode-1" class="headerlink" title="VSCode"></a>VSCode</h3><p>Shift + Alt + F</p>
+<p>或</p>
+<ul>
+<li>Mac：CMD + Shift + P -&gt; Format Document</li>
+<li>WIndows：Ctlr + Shift + P -&gt; Format Document</li>
+</ul>
+<h1 id="自动校正"><a href="#自动校正" class="headerlink" title="自动校正"></a>自动校正</h1><hr>
+<p>使用husky + lint-staged，在<code>pre-commit</code>时会自动校正代码。</p>
+<pre class=" language-javascript"><code class="language-javascript"># <span class="token keyword">package</span><span class="token punctuation">.</span>json
+
+<span class="token punctuation">{</span>
+  <span class="token string">"devDependencies"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"husky"</span><span class="token punctuation">:</span> <span class="token string">"^3.0.5"</span><span class="token punctuation">,</span>
+    <span class="token string">"lint-staged"</span><span class="token punctuation">:</span> <span class="token string">"^9.2.5"</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"husky"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"hooks"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+      <span class="token string">"pre-commit"</span><span class="token punctuation">:</span> <span class="token string">"lint-staged"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">"lint-staged"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"*.{js,scss,json,md,vue}"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token string">"prettier --write"</span><span class="token punctuation">,</span>
+      <span class="token string">"git add"</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 id="脚本命令"><a href="#脚本命令" class="headerlink" title="脚本命令"></a>脚本命令</h1><hr>
+<p><code>npm run format</code>格式化<code>src</code>下的文件*.{js,scss,json,md,vue}</p>
+<pre class=" language-javascript"><code class="language-javascript"># <span class="token keyword">package</span><span class="token punctuation">.</span>json
+<span class="token punctuation">{</span>
+  <span class="token string">"scripts"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">"format"</span><span class="token punctuation">:</span> <span class="token string">"prettier --write src/**/*.{js,scss,json,md,vue}"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span></code></pre>
+
                 </div>
             </div>
     
             <nav class="post-pagination">
     
-    <a class="newer-posts" href="/2016/05/22/ES6优化-尾递归/">
-        上一篇<br>ES6优化-尾递归
+    <a class="newer-posts" href="/2019/05/08/你不懂JS（You-Dont-Know-JS）阅读总结/">
+        上一篇<br>你不懂JS（You-Dont-Know-JS）阅读总结
     </a>
     
     <span class="page-number"></span>
+    
+    <a class="older-posts" href="/2018/06/24/Git合作模式/">
+        下一篇<br>Git合作模式
+    </a>
     
 </nav>
 
@@ -229,7 +311,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js" integrity="sha256-FtWfRI+thWlNz2sB3SJbwKx5PgMyKIVgwHCTwa3biXc=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@14.2.1/dist/smooth-scroll.polyfills.min.js" integrity="sha256-CI4Gq5E0io1Pv0xM3qPM+NUIOhbIBvC3GiN1Y4KhXpw=" crossorigin="anonymous"></script>
-<script src="/js/journal.js?80853247"></script>
+<script src="/js/journal.js?6013988"></script>
 
 
 
